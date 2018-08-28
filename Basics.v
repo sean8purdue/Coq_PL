@@ -376,6 +376,8 @@ Definition isred (c : color) : bool :=
   | black => false
   | white => false
   | primary red => true
+  (* Non exhaustive pattern-matching: no clause found for pattern primary green *)
+  (* | primary _ => false *)
   | primary _ => false
   end.
 
