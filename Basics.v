@@ -360,6 +360,9 @@ Inductive color : Type :=
 Definition monochrome (c : color) : bool :=
   match c with
   | black => true
+  (* test incomplete match, will get syntax error, have to 
+  match all the constructor in the type *)
+  (* | white => true *)
   | white => true
   | primary p => false
   end.
