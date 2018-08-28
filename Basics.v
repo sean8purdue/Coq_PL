@@ -492,6 +492,12 @@ Definition minustwo (n : nat) : nat :=
 
 Compute (minustwo 4).
   (* ===> 2 : nat *)
+Compute (minustwo 1).
+  (* ===> 0 : nat *)
+Compute (minustwo 2).
+  (* ===> 0 : nat *)
+Compute (minustwo 3).
+  (* ===> 1 : nat *)
 
 (** The constructor [S] has the type [nat -> nat], just like
     [pred] and functions like [minustwo]: *)
