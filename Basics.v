@@ -492,6 +492,8 @@ Definition minustwo (n : nat) : nat :=
 
 Compute (minustwo 4).
   (* ===> 2 : nat *)
+Compute (minustwo 0).
+  (* ===> 0 : nat *)
 Compute (minustwo 1).
   (* ===> 0 : nat *)
 Compute (minustwo 2).
