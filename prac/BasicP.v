@@ -40,36 +40,30 @@ Notation "x || y" := (orb x y).
 Example test_orb5:  false || false || true = true.
 Proof. simpl. reflexivity. Qed.
 
-(** _A note on notation_: In [.v] files, we use square brackets
-    to delimit fragments of Coq code within comments; this convention,
-    also used by the [coqdoc] documentation tool, keeps them visually
-    separate from the surrounding text.  In the HTML version of the
-    files, these pieces of text appear in a [different font].
-
-    The command [Admitted] can be used as a placeholder for an
-    incomplete proof.  We'll use it in exercises, to indicate the
-    parts that we're leaving for you -- i.e., your job is to replace
-    [Admitted]s with real proofs. *)
-
-(** **** Exercise: 1 star (nandb)  *)
-(** Remove "[Admitted.]" and complete the definition of the following
-    function; then make sure that the [Example] assertions below can
-    each be verified by Coq.  (Remove "[Admitted.]" and fill in each
-    proof, following the model of the [orb] tests above.) The function
-    should return [true] if either or both of its inputs are
-    [false]. *)
-
-Definition nandb (b1:bool) (b2:bool) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(* SeanP : may have better solution *)
+Definition nandb (b1:bool) (b2:bool) : bool :=
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *) (* . Admitted. *)
+  match b1 with
+  | false => true
+  | true => match b2 with
+            | true => false
+            | false => true
+            end
+  end.
 
 Example test_nandb1:               (nandb true false) = true.
-(* FILL IN HERE *) Admitted.
+(* FILL IN HERE *) (* Admitted. *)
+Proof. simpl. reflexivity. Qed.
+
 Example test_nandb2:               (nandb false false) = true.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
+
 Example test_nandb3:               (nandb false true) = true.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
+
 Example test_nandb4:               (nandb true true) = false.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
+
 (** [] *)
 
 (** **** Exercise: 1 star (andb3)  *)
