@@ -66,13 +66,30 @@ Proof. simpl. reflexivity. Qed.
 
 (** [] *)
 
+(* Sean nandb solution 2 *)
+Definition nandb_1 (b1:bool) (b2:bool) : bool :=
+  match b1, b2 with
+  | true , true => false
+  | _ , _ => true
+  end.
+Example test_nandb_1_1:               (nandb_1 true false) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_nandb_1_2:               (nandb_1 false false) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_nandb_1_3:               (nandb_1 false true) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_nandb_1_4:               (nandb_1 true true) = false.
+Proof. simpl. reflexivity. Qed.
+
+(** [] *)
+
 (** **** Exercise: 1 star (andb3)  *)
 (** Do the same for the [andb3] function below. This function should
     return [true] when all of its inputs are [true], and [false]
     otherwise. *)
 
-Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(* SeanE *)
+Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool :=
 
 Example test_andb31:                 (andb3 true true true) = true.
 (* FILL IN HERE *) Admitted.

@@ -1,0 +1,7 @@
+{
+    // Controls if quick suggestions should show up while typing
+    "editor.acceptSuggestionOnEnter": "off",
+// Options are:
+// "on" | "smart" | "off"
+
+}
