@@ -108,10 +108,6 @@ Proof. simpl. reflexivity. Qed.
 (* ================================================================= *)
 (** ** Function Types *)
 
-(** Every expression in Coq has a type, describing what sort of
-    thing it computes. The [Check] command asks Coq to print the type
-    of an expression. *)
-
 Check true.
 (* ===> true : bool *)
 Check (negb true).
@@ -123,3 +119,51 @@ Check (negb true).
 
 Check negb.
 (* ===> negb : bool -> bool *)
+
+(* ================================================================= *)
+(** ** Module *)
+Module NatPlayground.
+
+(* ================================================================= *)
+(** ** Numbers *)
+Inductive nat : Type :=
+  | O : nat (* Sean c1 : which is 0 *)
+  | S : nat -> nat.
+
+(* SeanQ : self defined nat is in this scope *)
+End NatPlayground.
+
+Definition minustwo (n : nat) : nat :=
+  match n with
+    | O => O
+    | S O => O
+    | S (S n') => n'
+  end.
+
+(* Sean q : how minus two work? *)
+Compute (minustwo 4).
+  (* ===> 2 : nat *)
+Compute (minustwo 0).
+  (* ===> 0 : nat *)
+Compute (minustwo 1).
+  (* ===> 0 : nat *)
+Compute (minustwo 2).
+  (* ===> 0 : nat *)
+Compute (minustwo 3).
+  (* ===> 1 : nat *)
+
+(* SeanE *)
+Definition minusthree (n : nat) : nat :=
+  match n with
+    | O => O
+    | S O => O
+    | S (S (O)) => O  (* 2 return 0 *)
+    | S (S (S n')) => n' 
+  end.
+
+Compute (minusthree 2).
+  (* ===> 0 : nat *)
+Compute (minusthree 3).
+  (* ===> 0 : nat *)
+Compute (minusthree 4).
+  (* ===> 1 : nat *)

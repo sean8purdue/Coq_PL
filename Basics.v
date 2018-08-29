@@ -490,6 +490,7 @@ Check S( (S (S (S (S O))))).
   (* ===> 5 : nat *)
 (* Sean q : how to represent 12, 999...? *)
 
+(* SeanQ : minusVariable, minus3, minusN...? *)
 Definition minustwo (n : nat) : nat :=
   match n with
     | O => O
