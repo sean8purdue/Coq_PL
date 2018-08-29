@@ -167,3 +167,54 @@ Compute (minusthree 3).
   (* ===> 0 : nat *)
 Compute (minusthree 4).
   (* ===> 1 : nat *)
+
+(* Recursion Function *)
+Fixpoint exp (base power : nat) : nat :=
+  match power with
+    | O => S O
+    | S p => mult base (exp base p)
+  end.
+
+(* SeanQ ? SeanE *)
+(* exp is defined
+exp is recursively defined (decreasing on 2nd argument) *)
+
+Compute (exp 1 5).
+  (* ===> 0 : nat *)
+Compute (exp 1 5).
+  (* ===> 1 : nat *)
+Compute (exp 2 5).
+  (* ===> 32 : nat *)
+
+(** **** Exercise: 1 star (factorial)  *)
+(** Recall the standard mathematical factorial function:
+
+       factorial(0)  =  1
+       factorial(n)  =  n * factorial(n-1)     (if n>0)
+
+    Translate this into Coq. *)
+
+Fixpoint factorial (n:nat) : nat
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Example test_factorial1:          (factorial 3) = 6.
+(* FILL IN HERE *) Admitted.
+Example test_factorial2:          (factorial 5) = (mult 10 12).
+(* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** We can make numerical expressions a little easier to read and
+    write by introducing _notations_ for addition, multiplication, and
+    subtraction. *)
+
+Notation "x + y" := (plus x y)
+                       (at level 50, left associativity)
+                       : nat_scope.
+Notation "x - y" := (minus x y)
+                       (at level 50, left associativity)
+                       : nat_scope.
+Notation "x * y" := (mult x y)
+                       (at level 40, left associativity)
+                       : nat_scope.
+
+Check ((0 + 1) + 1).
