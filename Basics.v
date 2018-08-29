@@ -493,9 +493,9 @@ Check S( (S (S (S (S O))))).
 (* SeanQ : minusVariable, minus3, minusN...? *)
 Definition minustwo (n : nat) : nat :=
   match n with
-    | O => O
-    | S O => O
-    | S (S n') => n'
+    | O => O   (* base case if 0 then return 0 *)
+    | S O => O  (* base case if 1 then return 0 *)
+    | S (S n') => n' (* other case : minus 2 successor *)
   end.
 
 (* Sean q : how minus two work? *)
@@ -651,7 +651,7 @@ Fixpoint exp (base power : nat) : nat :=
 (* exp is defined
 exp is recursively defined (decreasing on 2nd argument) *)
 
-Compute (exp 1 5).
+Compute (exp 0 5).
   (* ===> 0 : nat *)
 Compute (exp 1 5).
   (* ===> 1 : nat *)
