@@ -211,16 +211,33 @@ Proof. simpl. reflexivity. Qed.
 the fibonnaci function that Coq accepts as terminating: *)
 Fixpoint fibonacci (n:nat) : nat :=
   match n with
-    O => 1
+  |  O => 1
   | (S n') =>
        match n' with
-         O => 1
+       |  O => 1
        | (S n'') => (fibonacci n'') + (fibonacci n')
        end
   end.
 
-Example test_fibonacci1:          (factorial 3) = 6.
+(* The above definition is only an example to show 
+the fibonnaci function that Coq accepts as terminating.
+  It's not the correct definition of fibonacci function.
+  Since fibonacci 2 = 2 according to the above definition.
+  *)
+
+Example test_fibonacci1:          (fibonacci 1) = 1.
 Proof. simpl. reflexivity. Qed.
+(* Example test_fibonacci2:          (fibonacci 2) = 1.
+(* Wrong: fibonacci 2 => 2   = 1*)
+Proof. simpl. reflexivity. Qed. *)
+(* Example test_fibonacci3:          (fibonacci 3) = 2.
+Proof. simpl. reflexivity. Qed. *)
+(* Example test_fibonacci4:          (fibonacci 4) = 3. *)
+(* Proof. simpl. reflexivity. Qed.
+Example test_fibonacci5:          (fibonacci 5) = 5.
+Proof. simpl. reflexivity. Qed.
+Example test_fibonacci6:          (fibonacci 6) = 8.
+Proof. simpl. reflexivity. Qed. *)
 
 (** We can make numerical expressions a little easier to read and
     write by introducing _notations_ for addition, multiplication, and
@@ -237,3 +254,33 @@ Notation "x * y" := (mult x y)
                        : nat_scope.
 
 Check ((0 + 1) + 1).
+(* 0 + 1 + 1 *)
+
+(** **** Exercise: 1 star (blt_nat)  *)
+(** The [blt_nat] function tests [nat]ural numbers for [l]ess-[t]han,
+    yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
+    this one, define it in terms of a previously defined function. *)
+
+(* Definition blt_nat (n m : nat) : bool :=  *)
+Fixpoint blt_nat (n m : nat) : bool := 
+  match n with
+  | O => 
+    match m with
+    |  O => false
+    | S _ => true
+    end
+  | S n' => 
+    match m with
+    | O => false
+    | S m' => blt_nat n' m'
+    end
+  end.
+
+Example test_blt_nat1:             (blt_nat 2 2) = false.
+Proof. simpl. reflexivity. Qed.
+Example test_blt_nat2:             (blt_nat 2 4) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_blt_nat3:             (blt_nat 4 2) = false.
+Proof. simpl. reflexivity. Qed.
+
+(** [] *)

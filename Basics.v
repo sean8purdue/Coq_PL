@@ -746,7 +746,8 @@ Proof. simpl. reflexivity.  Qed.
     yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
     this one, define it in terms of a previously defined function. *)
 
-Definition blt_nat (n m : nat) : bool
+(* Definition blt_nat (n m : nat) : bool *)
+Fixpoint blt_nat (n m : nat) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
@@ -778,6 +779,9 @@ Example test_blt_nat3:             (blt_nat 4 2) = false.
 Theorem plus_O_n : forall n : nat, 0 + n = n.
 Proof.
   intros n. simpl. reflexivity.  Qed.
+
+(* SeanQ : intros n only put (forall n : nat)'s n above,
+Or these 3 n are all reference to the same variable? *)
 
 (** (You may notice that the above statement looks different in
     the [.v] file in your IDE than it does in the HTML rendition in
