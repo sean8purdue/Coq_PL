@@ -219,8 +219,25 @@ Fixpoint fibonacci (n:nat) : nat :=
        end
   end.
 
-Example test_fibonacci1:          (factorial 3) = 6.
+(* The above definition is only an example to show 
+the fibonnaci function that Coq accepts as terminating.
+  It's not the correct definition of fibonacci function.
+  Since fibonacci 2 = 2 according to the above definition.
+  *)
+
+Example test_fibonacci1:          (fibonacci 1) = 1.
 Proof. simpl. reflexivity. Qed.
+(* Example test_fibonacci2:          (fibonacci 2) = 1.
+(* Wrong: fibonacci 2 => 2   = 1*)
+Proof. simpl. reflexivity. Qed. *)
+(* Example test_fibonacci3:          (fibonacci 3) = 2.
+Proof. simpl. reflexivity. Qed. *)
+Example test_fibonacci4:          (fibonacci 4) = 3.
+(* Proof. simpl. reflexivity. Qed.
+Example test_fibonacci5:          (fibonacci 5) = 5.
+Proof. simpl. reflexivity. Qed.
+Example test_fibonacci6:          (fibonacci 6) = 8.
+Proof. simpl. reflexivity. Qed. *)
 
 (** We can make numerical expressions a little easier to read and
     write by introducing _notations_ for addition, multiplication, and
@@ -237,3 +254,4 @@ Notation "x * y" := (mult x y)
                        : nat_scope.
 
 Check ((0 + 1) + 1).
+(* 0 + 1 + 1 *)
