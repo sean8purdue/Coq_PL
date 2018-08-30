@@ -225,21 +225,23 @@ the fibonnaci function that Coq accepts as terminating.
   Since fibonacci 2 = 2 according to the above definition.
   *)
 
+Example test_fibonacci0:          (fibonacci 0) = 1.
+Proof. simpl. reflexivity. Qed.
 Example test_fibonacci1:          (fibonacci 1) = 1.
 Proof. simpl. reflexivity. Qed.
-(* Example test_fibonacci2:          (fibonacci 2) = 1.
-Proof. simpl. reflexivity. Qed. *)
-(* Example test_fibonacci3:          (fibonacci 3) = 2.
-Proof. simpl. reflexivity. Qed. *)
-(* Example test_fibonacci4:          (fibonacci 4) = 3. *)
-(* Proof. simpl. reflexivity. Qed.
-Example test_fibonacci5:          (fibonacci 5) = 5.
+Example test_fibonacci2:          (fibonacci 2) = 2.
 Proof. simpl. reflexivity. Qed.
-Example test_fibonacci6:          (fibonacci 6) = 8.
-Proof. simpl. reflexivity. Qed. *)
+Example test_fibonacci3:          (fibonacci 3) = 3.
+Proof. simpl. reflexivity. Qed.
+Example test_fibonacci4:          (fibonacci 4) = 5.
+Proof. simpl. reflexivity. Qed.
+Example test_fibonacci5:          (fibonacci 5) = 8.
+Proof. simpl. reflexivity. Qed.
+Example test_fibonacci6:          (fibonacci 6) = 13.
+Proof. simpl. reflexivity. Qed.
 
-(* Wrong: fibonacci 2 => 2   = 1*)
-(* not Wrong *)
+(* ============================================================ *)
+(* Wrong: fibonacci 2 => 2   = 1*) (* not Wrong *)
 (* !!! There are actually two definitions of Fibonacci sequence!
 
 In mathematics, the Fibonacci numbers are the numbers in the following integer sequence,
@@ -254,6 +256,8 @@ Often, especially in modern usage, the sequence is extended by one more initial 
 By definition, the first two numbers in the Fibonacci sequence are 
 either 1 and 1, or 0 and 1, depending on the chosen starting point of the sequence,
 and each subsequent number is the sum of the previous two. *)
+
+(* ============================================================ *)
 
 (** We can make numerical expressions a little easier to read and
     write by introducing _notations_ for addition, multiplication, and
