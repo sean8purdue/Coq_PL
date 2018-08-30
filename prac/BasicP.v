@@ -211,10 +211,10 @@ Proof. simpl. reflexivity. Qed.
 the fibonnaci function that Coq accepts as terminating: *)
 Fixpoint fibonacci (n:nat) : nat :=
   match n with
-    O => 1
+  |  O => 1
   | (S n') =>
        match n' with
-         O => 1
+       |  O => 1
        | (S n'') => (fibonacci n'') + (fibonacci n')
        end
   end.
@@ -232,7 +232,7 @@ Proof. simpl. reflexivity. Qed.
 Proof. simpl. reflexivity. Qed. *)
 (* Example test_fibonacci3:          (fibonacci 3) = 2.
 Proof. simpl. reflexivity. Qed. *)
-Example test_fibonacci4:          (fibonacci 4) = 3.
+(* Example test_fibonacci4:          (fibonacci 4) = 3. *)
 (* Proof. simpl. reflexivity. Qed.
 Example test_fibonacci5:          (fibonacci 5) = 5.
 Proof. simpl. reflexivity. Qed.
@@ -255,3 +255,22 @@ Notation "x * y" := (mult x y)
 
 Check ((0 + 1) + 1).
 (* 0 + 1 + 1 *)
+
+(** **** Exercise: 1 star (blt_nat)  *)
+(** The [blt_nat] function tests [nat]ural numbers for [l]ess-[t]han,
+    yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
+    this one, define it in terms of a previously defined function. *)
+
+Definition blt_nat (n m : nat) : bool := 
+  match n with
+    | O => 
+        match m with
+          O => false
+
+Example test_blt_nat1:             (blt_nat 2 2) = false.
+(* FILL IN HERE *) Admitted.
+Example test_blt_nat2:             (blt_nat 2 4) = true.
+(* FILL IN HERE *) Admitted.
+Example test_blt_nat3:             (blt_nat 4 2) = false.
+(* FILL IN HERE *) Admitted.
+(** [] *)
