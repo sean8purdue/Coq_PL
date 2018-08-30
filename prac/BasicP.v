@@ -261,16 +261,26 @@ Check ((0 + 1) + 1).
     yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
     this one, define it in terms of a previously defined function. *)
 
-Definition blt_nat (n m : nat) : bool := 
+(* Definition blt_nat (n m : nat) : bool :=  *)
+Fixpoint blt_nat (n m : nat) : bool := 
   match n with
-    | O => 
-        match m with
-          O => false
+  | O => 
+    match m with
+    |  O => false
+    | S _ => true
+    end
+  | S n' => 
+    match m with
+    | O => false
+    | S m' => blt_nat n' m'
+    end
+  end.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
 Example test_blt_nat2:             (blt_nat 2 4) = true.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
 Example test_blt_nat3:             (blt_nat 4 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.
+
 (** [] *)
