@@ -206,6 +206,22 @@ Example test_factorial2:          (factorial 5) = (mult 10 12).
 Proof. simpl. reflexivity. Qed.
 (** [] *)
 
+(* SeanQ : what is structurally recursive definition *)
+(* an example of a structurally recursive definition of 
+the fibonnaci function that Coq accepts as terminating: *)
+Fixpoint fibonacci (n:nat) : nat :=
+  match n with
+    O => 1
+  | (S n') =>
+       match n' with
+         O => 1
+       | (S n'') => (fibonacci n'') + (fibonacci n')
+       end
+  end.
+
+Example test_fibonacci1:          (factorial 3) = 6.
+Proof. simpl. reflexivity. Qed.
+
 (** We can make numerical expressions a little easier to read and
     write by introducing _notations_ for addition, multiplication, and
     subtraction. *)
