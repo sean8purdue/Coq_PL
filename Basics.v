@@ -360,6 +360,10 @@ Inductive color : Type :=
 Definition monochrome (c : color) : bool :=
   match c with
   | black => true
+  (* Sean q1 *)
+  (* test incomplete match, will get syntax error, have to 
+  match all the constructor in the type *)
+  (* | white => true *)
   | white => true
   | primary p => false
   end.
@@ -373,6 +377,9 @@ Definition isred (c : color) : bool :=
   | black => false
   | white => false
   | primary red => true
+  (* Sean q1 *)
+  (* Non exhaustive pattern-matching: no clause found for pattern primary green *)
+  (* | primary _ => false *)
   | primary _ => false
   end.
 
@@ -408,7 +415,7 @@ Module NatPlayground.
     numbers as follows: *)
 
 Inductive nat : Type :=
-  | O : nat
+  | O : nat (* Sean c1 : which is 0 *)
   | S : nat -> nat.
 
 (** The clauses of this definition can be read:
@@ -437,6 +444,7 @@ Inductive nat : Type :=
     from data constructors, like [true], [andb true false], [S (S
     false)], and [O (O (O S))] do not.
 
+    Sean q3
     A critical point here is that what we've done so far is just to
     define a _representation_ of numbers: a way of writing them down.
     The names [O] and [S] are arbitrary, and at this point they have
@@ -453,6 +461,7 @@ Inductive nat' : Type :=
 (** The _interpretation_ of these marks comes from how we use them to
     compute. *)
 
+    (* Sean q3 : minus 1?, is pred recursive function? *)
 (** We can do this by writing functions that pattern match on
     representations of natural numbers just as we did above with
     booleans and days -- for example, here is the predecessor
@@ -469,7 +478,7 @@ Definition pred (n : nat) : nat :=
 
 End NatPlayground.
 
-(** Because natural numbers are such a pervasive form of data,
+(** Because natural numbers are such a pervasive(广泛应用) form of data,
     Coq provides a tiny bit of built-in magic for parsing and printing
     them: ordinary arabic numerals can be used as an alternative to
     the "unary" notation defined by the constructors [S] and [O].  Coq
@@ -477,16 +486,29 @@ End NatPlayground.
 
 Check (S (S (S (S O)))).
   (* ===> 4 : nat *)
+Check S( (S (S (S (S O))))).
+  (* ===> 5 : nat *)
+(* Sean q : how to represent 12, 999...? *)
 
+(* SeanQ : minusVariable, minus3, minusN...? *)
 Definition minustwo (n : nat) : nat :=
   match n with
-    | O => O
-    | S O => O
-    | S (S n') => n'
+    | O => O   (* base case if 0 then return 0 *)
+    | S O => O  (* base case if 1 then return 0 *)
+    | S (S n') => n' (* other case : minus 2 successor *)
   end.
 
+(* Sean q : how minus two work? *)
 Compute (minustwo 4).
   (* ===> 2 : nat *)
+Compute (minustwo 0).
+  (* ===> 0 : nat *)
+Compute (minustwo 1).
+  (* ===> 0 : nat *)
+Compute (minustwo 2).
+  (* ===> 0 : nat *)
+Compute (minustwo 3).
+  (* ===> 1 : nat *)
 
 (** The constructor [S] has the type [nat -> nat], just like
     [pred] and functions like [minustwo]: *)
@@ -495,6 +517,7 @@ Check S.
 Check pred.
 Check minustwo.
 
+(* SeanI : difference between [pred] and [S] *)
 (** These are all things that can be applied to a number to yield a
     number.  However, there is a fundamental difference between the
     first one and the other two: functions like [pred] and [minustwo]
@@ -502,13 +525,15 @@ Check minustwo.
     says that [pred 2] can be simplified to [1] -- while the
     definition of [S] has no such behavior attached.  Although it is
     like a function in the sense that it can be applied to an
-    argument, it does not _do_ anything at all!  It is just a way of
+    argument, it does not _do_ anything at all! (SeanQ ?) It is just a way of
     writing down numbers.  (Think about standard arabic numerals: the
     numeral [1] is not a computation; it's a piece of data.  When we
     write [111] to mean the number one hundred and eleven, we are
     using [1], three times, to write down a concrete representation of
     a number.)
+    
 
+    SeanQ : why need check [n-2]?
     For most function definitions over numbers, just pattern matching
     is not enough: we also need recursion.  For example, to check that
     a number [n] is even, we may need to recursively check whether
@@ -517,7 +542,7 @@ Check minustwo.
 
 Fixpoint evenb (n:nat) : bool :=
   match n with
-  | O        => true
+  | O        => true       (* SeanQ : base case ? *)
   | S O      => false
   | S (S n') => evenb n'
   end.
@@ -574,20 +599,40 @@ Fixpoint mult (n m : nat) : nat :=
   match n with
     | O => O
     | S n' => plus m (mult n' m)
+    (* SeanC : also ok *)
+    (* | S n' => plus (mult n' m) m *)
   end.
 
 Example test_mult1: (mult 3 3) = 9.
 Proof. simpl. reflexivity.  Qed.
 
+Example test_mult2: (mult 3 2) = 6.
+Proof. simpl. reflexivity.  Qed.
+
+(* SeanQ ??? *)
+(*  [mult (S (S (S O))) (S (S O))]
+==> [plus (S (S O)) (mult (S (S O)) (S (S O)))]
+      by the second clause of the mult [match]
+==> [S (plus ((S O) (mult (S (S O)) (S (S O)))]
+      by the second clause of the plus [match]
+*)
+
 (** You can match two expressions at once by putting a comma
     between them: *)
 
+(* SeanQ ? *)
 Fixpoint minus (n m:nat) : nat :=
   match n, m with
   | O   , _    => O
   | S _ , O    => n
   | S n', S m' => minus n' m'
   end.
+
+(* SeanE *)
+Compute (minus 2 5).
+  (* ===> 0 : nat *)
+Compute (minus 8 5).
+  (* ===> 8 : nat *)
 
 (** Again, the [_] in the first line is a _wildcard pattern_.  Writing
     [_] in a pattern is the same as writing some variable that doesn't
@@ -601,6 +646,17 @@ Fixpoint exp (base power : nat) : nat :=
     | O => S O
     | S p => mult base (exp base p)
   end.
+
+(* SeanQ ? SeanE *)
+(* exp is defined
+exp is recursively defined (decreasing on 2nd argument) *)
+
+Compute (exp 0 5).
+  (* ===> 0 : nat *)
+Compute (exp 1 5).
+  (* ===> 1 : nat *)
+Compute (exp 2 5).
+  (* ===> 32 : nat *)
 
 (** **** Exercise: 1 star (factorial)  *)
 (** Recall the standard mathematical factorial function:
