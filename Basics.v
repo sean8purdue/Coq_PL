@@ -780,6 +780,9 @@ Theorem plus_O_n : forall n : nat, 0 + n = n.
 Proof.
   intros n. simpl. reflexivity.  Qed.
 
+(* SeanQ : intros n only put (forall n : nat)'s n above,
+Or these 3 n are all reference to the same variable? *)
+
 (** (You may notice that the above statement looks different in
     the [.v] file in your IDE than it does in the HTML rendition in
     your browser, if you are viewing both. In [.v] files, we write the
